@@ -3,7 +3,7 @@
 
 	<groupId>com.jmethods</groupId>
 	<artifactId>test</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>test</name>
@@ -31,7 +31,7 @@
 		<connection>scm:git:https://github.com/sai-pullabhotla/test.git</connection>
 		<developerConnection>scm:git:https://github.com/sai-pullabhotla/test.git</developerConnection>
 		<url>scm:git:https://github.com/sai-pullabhotla/test.git</url>
-		<tag>test-0.0.4</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 
