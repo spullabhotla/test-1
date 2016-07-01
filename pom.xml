@@ -6,8 +6,9 @@
 	<version>0.0.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>test</name>
-	<url>http://maven.apache.org</url>
+	<name>Test</name>
+	<description>Test project to understand the staging/release process</description>
+	<url>https://github.com/sai-pullabhotla/test</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
