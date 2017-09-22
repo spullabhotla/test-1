@@ -1,1 +1,8 @@
 language: java
+dist: trusty
+addons:
+  sonarcloud:
+    organization: sai-pullabhotla-github
+    token: $SONAR_TOKEN
+script:
+  - sonar-scanner
