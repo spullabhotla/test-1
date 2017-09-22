@@ -1,34 +1,42 @@
 package com.jmethods.test;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.google.cloud.datastore.Datastore;
+import com.google.cloud.datastore.Entity;
+import com.google.cloud.datastore.FullEntity;
+import com.google.cloud.datastore.IncompleteKey;
+import com.google.cloud.datastore.KeyFactory;
+import com.google.cloud.datastore.testing.LocalDatastoreHelper;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest extends TestCase {
-	/**
-	 * Create the test case
-	 *
-	 * @param testName
-	 *            name of the test case
-	 */
-	public AppTest(String testName) {
-		super(testName);
+public class AppTest {
+
+	private static LocalDatastoreHelper helper;
+	private static Datastore datastore;
+
+	@BeforeClass
+	public static void beforeClass() throws IOException, InterruptedException {
+		helper = LocalDatastoreHelper.create(1.0);
+		helper.start();
+		datastore = helper.getOptions().getService();
 	}
 
-	/**
-	 * @return the suite of tests being tested
-	 */
-	public static Test suite() {
-		return new TestSuite(AppTest.class);
-	}
-
-	/**
-	 * Rigourous Test :-)
-	 */
+	@Test
 	public void testApp() {
-		assertTrue(true);
+		KeyFactory kf = datastore.newKeyFactory();
+		IncompleteKey incompleteKey = kf.setKind("MyEntity").newKey();
+		FullEntity<IncompleteKey> fullEntity = FullEntity.newBuilder().setKey(incompleteKey).set("name", "John Doe")
+				.build();
+		Entity entity = datastore.add(fullEntity);
+		Entity entity2 = datastore.get(entity.getKey());
+		assertEquals(entity, entity2);
 	}
 }
