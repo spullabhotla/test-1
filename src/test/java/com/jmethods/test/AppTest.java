@@ -1,6 +1,7 @@
 package com.jmethods.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.io.IOException;
 
@@ -39,4 +40,19 @@ public class AppTest {
 		Entity entity2 = datastore.get(entity.getKey());
 		assertEquals(entity, entity2);
 	}
+
+	@Test
+	public void testApp2() {
+		KeyFactory kf = datastore.newKeyFactory();
+		IncompleteKey incompleteKey = kf.setKind("MyEntity").newKey();
+		FullEntity<IncompleteKey> fullEntity = FullEntity.newBuilder().setKey(incompleteKey).set("name", "John Doe")
+				.build();
+		Entity entity = datastore.add(fullEntity);
+		Entity entity2 = Entity.newBuilder(entity).set("name", "John Smith").build();
+		datastore.update(entity2);
+		Entity entity3 = datastore.get(entity2.getKey());
+		assertEquals(entity2, entity3);
+		assertNotEquals(entity, entity3);
+	}
+
 }
